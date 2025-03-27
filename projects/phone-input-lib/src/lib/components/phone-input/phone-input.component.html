@@ -1,0 +1,30 @@
+<form [formGroup]="phoneForm" class="phone-form">
+    <div class="phone-input-container">
+      <mat-form-field appearance="outline" class="country-select">
+        <mat-label>País</mat-label>
+        <mat-select formControlName="country">
+          <mat-option *ngFor="let key of countryKeys" [value]="key">
+            {{ countryInfo[key].name }} ({{ countryInfo[key].code }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="phone-field">
+        <span matPrefix class="country-code">
+          {{ countryInfo[phoneForm.value.country].code }} &nbsp;
+        </span>
+        <input
+          matInput
+          type="text"
+          formControlName="number"
+          (input)="onInput($event)"
+          autocomplete="tel"
+          placeholder="Número"
+        />
+        <mat-error *ngIf="phoneForm.get('number')?.invalid && phoneForm.get('number')?.touched">
+          Minimo {{ maxLength }} dígitos requeridos
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+  
