@@ -1,6 +1,11 @@
 {
-  "name": "phone-input-lib",
+  "name": "@eliandsantos/phone-input-lib",
   "version": "0.0.1",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/public-api.ts"
+    }
+  },
   "peerDependencies": {
     "@angular/common": "^18.2.0",
     "@angular/core": "^18.2.0"
