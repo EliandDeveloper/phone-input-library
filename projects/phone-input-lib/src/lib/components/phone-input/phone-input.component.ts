@@ -8,7 +8,7 @@ import { phoneMinLengthValidator } from '../../validators/phone-min-length.valid
   selector: 'lib-phone-input',
   templateUrl: './phone-input.component.html',
   styleUrls: ['./phone-input.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated // Changed to ShadowDom for better encapsulation
+  encapsulation: ViewEncapsulation.ShadowDom 
 })
 export class PhoneInputComponent implements OnInit {
   @Input() parentForm!: FormGroup;

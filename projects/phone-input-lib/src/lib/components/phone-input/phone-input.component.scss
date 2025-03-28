@@ -1,71 +1,81 @@
+:host {
+  /* Default CSS Variables - can be overridden by consumers */
+  --phone-input-gap: 15px;
+  --phone-input-country-width: 65%;
+  --phone-input-number-width: 65%;
+  --phone-input-font-size: 14px;
+  --phone-input-focus-color: #3f51b5;
+  --phone-input-dark-focus-color: #7986cb;
+  --phone-input-prefix-margin: 0 15px 0 15px;
+  
+  display: block;
+  width: 100%;
+}
+
 .phone-form {
-    background: transparent;
-    width: 100%;
+  background: transparent;
+  width: 100%;
+}
+
+.phone-input-container {
+  display: flex;
+  gap: var(--phone-input-gap);
+  width: 100%;
+}
+
+.country-select {
+  width: var(--phone-input-country-width);
+}
+
+.phone-field {
+  width: var(--phone-input-number-width);
+}
+
+.country-code {
+  font-size: var(--phone-input-font-size);
+  margin: var(--phone-input-prefix-margin);
+}
+
+/* Use more specific selectors to scope the styles better */
+.mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+.mat-mdc-form-field-infix {
+  width: 100% !important;
+}
+
+/* Focused styles - no longer using ::ng-deep */
+.mat-form-field-outline {
+  color: var(--phone-input-focus-color) !important;
+  opacity: 1 !important;
+}
+
+.mat-form-field-outline-thick {
+  opacity: 1 !important;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: var(--phone-input-focus-color) !important;
+}
+
+/* Dark theme specific styles */
+:host-context(.dark-theme) {
+  .mat-form-field-outline,
+  .mat-form-field-outline-thick {
+    color: var(--phone-input-dark-focus-color) !important;
   }
-  
+}
+
+/* Responsive styles */
+@media (max-width: 480px) {
   .phone-input-container {
-    display: flex;
-    gap: 15px; // Increased gap between the fields
-    width: 100%;
-  }
-  
-  .country-select {
-    width: 65%; // Slightly reduce width to create more spacing
-  }
-  
-  .phone-field {
-    width: 65%;
-  }
-  
-  // Ajustando colores de prefijo en tema claro y oscuro:
-  .country-code {
-    font-size: 14px;
-    margin: 0 15px 0 15px;
-  }
-  
-  // Fuerza el mat-form-field a lucir siempre "enfocado"
-  :host ::ng-deep {
-    .always-focused {
-      .mat-form-field-outline {
-        color: #3f51b5 !important; // Color primario de Material (azul)
-        opacity: 1 !important;
-      }
-      .mat-form-field-outline-thick {
-        opacity: 1 !important;
-      }
-      // Color para cuando el tema es oscuro
-      &.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-        color: #7986cb !important;
-      }
-    }
-  
-    // Ajuste para tema oscuro
-    .dark-theme .always-focused {
-      .mat-form-field-outline,
-      .mat-form-field-outline-thick {
-        color: #7986cb !important;
-      }
-    }
-  
-    .mat-form-field-wrapper {
-      padding-bottom: 0;
-    }
-  }
-  
-  // Ajustes responsivos
-  @media (max-width: 480px) {
-    .phone-input-container {
-      flex-direction: column;
-      gap: 16px; // Mantiene espacio en vista móvil
-    }
-  
-    .country-select,
-    .phone-field {
-      width: 100%;
-    }
+    flex-direction: column;
+    gap: var(--phone-input-gap);
   }
 
-  :host ::ng-deep .mat-mdc-form-field-infix {
-    width: 100% !important;
+  .country-select,
+  .phone-field {
+    width: 100%;
   }
-  
+}
