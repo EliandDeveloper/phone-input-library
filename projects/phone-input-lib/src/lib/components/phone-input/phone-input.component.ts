@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Inject, Optional } from '@angular/core';
+import { Component, Input, OnInit, Inject, Optional, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PHONE_INPUT_LIB_CONFIG, PhoneInputLibConfig } from '../../phone-input-lib.config';
 import { DEFAULT_COUNTRY_INFO, CountryInfo } from '../../enums/country-info';
@@ -7,7 +7,8 @@ import { phoneMinLengthValidator } from '../../validators/phone-min-length.valid
 @Component({
   selector: 'lib-phone-input',
   templateUrl: './phone-input.component.html',
-  styleUrls: ['./phone-input.component.scss']
+  styleUrls: ['./phone-input.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated // Changed to ShadowDom for better encapsulation
 })
 export class PhoneInputComponent implements OnInit {
   @Input() parentForm!: FormGroup;

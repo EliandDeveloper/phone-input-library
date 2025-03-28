@@ -1,6 +1,6 @@
 <form [formGroup]="phoneForm" class="phone-form">
     <div class="phone-input-container">
-      <mat-form-field appearance="outline" class="country-select">
+      <mat-form-field class="phone-field" appearance="outline" class="country-select">
         <mat-label>País</mat-label>
         <mat-select formControlName="country">
           <mat-option *ngFor="let key of countryKeys" [value]="key">
@@ -9,7 +9,7 @@
         </mat-select>
       </mat-form-field>
   
-      <mat-form-field appearance="outline" class="phone-field">
+      <mat-form-field class="phone-field" appearance="outline" class="phone-field">
         <span matPrefix class="country-code">
           {{ countryInfo[phoneForm.value.country].code }} &nbsp;
         </span>
@@ -26,5 +26,4 @@
         </mat-error>
       </mat-form-field>
     </div>
-  </form>
-  
+  </form>  
