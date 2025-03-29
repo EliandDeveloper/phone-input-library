@@ -1,0 +1,14 @@
+# Changelog
+
+## [0.0.1] - 2025-03-29
+
+### Added
+- 🎉 Initial release of `@eliandsantos/phone-input-lib`
+- International phone number input component for Angular
+- Country selector with dial codes
+- Automatic formatting based on country standards
+- Phone number validation (min length by country)
+- Responsive layout and customizable styling via CSS variables
+- Shadow DOM encapsulation
+- Exported pipes: `InternationalPhonePipe`, `PhonePrefixPipe`
+- Exported validator: `phoneMinLengthValidator`

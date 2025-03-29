@@ -1,141 +1,172 @@
-# PhoneInputLib
 
-PhoneInputLib is an Angular library for phone number input, allowing users to select a country and format the phone number according to the selected country. It is highly configurable and can be used in various environments such as dialogs, pages, forms, etc.
+# Phone Input Library Documentation
+
+
+The **Phone Input Library** is an Angular component that provides international phone number input capabilities with country selection and automatic formatting. This library enables developers to easily integrate standardized phone number input forms into their Angular applications.
+
+## Features
+
+- **Country Selection**: Dropdown menu with country names and their dialing codes  
+- **Automatic Formatting**: Phone numbers are automatically formatted based on the selected country's pattern  
+- **Validation**: Built-in validation for minimum length requirements based on country standards  
+- **Internationalization**: Support for countries across North America, South America, Europe, and Asia-Pacific  
+- **Customizable Styling**: CSS variables allow for easy theming and integration with your application  
+- **Responsive Design**: Mobile-friendly layout that adapts to screen size  
+- **Shadow DOM Encapsulation**: Styles remain isolated from the rest of your application  
 
 ## Installation
 
-To install this library, run:
-
 ```bash
-npm install phone-input-lib
+npm install @eliandsantos/phone-input-lib
 ```
 
-## Usage
+## Requirements
 
-### Importing the Module
+This library requires the following peer dependencies:
 
-To use the `PhoneInputComponent`, follow these steps:
+- Angular 18.2.0 or higher  
+- Angular Material  
 
-1. Import the `PhoneInputLibModule` in your main module or the module where you want to use it:
+## Basic Usage
 
-```typescript
-import { PhoneInputLibModule } from 'phone-input-lib';
+### Import the Module
+
+```ts
+import { PhoneInputLibModule } from '@eliandsantos/phone-input-lib';
 
 @NgModule({
   imports: [
     PhoneInputLibModule.forRoot({
-      defaultCountry: 'Venezuela',
-      styles: {
-        input: 'custom-input',
-        select: 'custom-select',
-        formField: 'custom-form-field'
-      }
+      defaultCountry: 'Venezuela'
     })
   ]
 })
 export class AppModule { }
 ```
 
-### Using the Component
-
-2. Use the component in your templates:
+### Use in Template
 
 ```html
-<form [formGroup]="form">
-  <lib-phone-input [parentForm]="form"></lib-phone-input>
+<form [formGroup]="myForm">
+  <lib-phone-input [parentForm]="myForm"></lib-phone-input>
 </form>
 ```
 
-### Configuration
+### Form Setup
 
-You can configure the library by passing an object to the `forRoot` method. The available options are:
-
-- `defaultCountry`: The default country code to be selected.
-- `styles`: An object to customize the styles of the component.
-
-### Complete Example
-
-#### Main Module
-
-```typescript name=app.module.ts
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
-import { AppComponent } from './app.component';
-import { PhoneInputLibModule } from 'phone-input-lib';
-
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    PhoneInputLibModule.forRoot({
-      defaultCountry: 'Venezuela',
-      styles: {
-        input: 'custom-input',
-        select: 'custom-select',
-        formField: 'custom-form-field'
-      }
-    })
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-```
-
-#### Component
-
-```typescript name=app.component.ts
+```ts
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-root',
-  template: `
-    <form [formGroup]="form">
-      <lib-phone-input [parentForm]="form"></lib-phone-input>
-    </form>
-  `,
-  styles: []
+  selector: 'app-my-component',
+  templateUrl: './my-component.html'
 })
-export class AppComponent implements OnInit {
-  form: FormGroup;
+export class MyComponent implements OnInit {
+  myForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-    this.form = this.fb.group({
-      phone: ['']
+  ngOnInit() {
+    this.myForm = this.fb.group({
+      phone: ['', Validators.required]
     });
   }
 }
 ```
 
-## Development
+## Configuration
 
-To run a development server, execute:
+### Module Configuration
 
-```bash
-ng serve
+The `forRoot` method accepts a configuration object:
+
+```ts
+PhoneInputLibModule.forRoot({
+  defaultCountry: 'USA',
+  countryInfo: { /* Custom country definitions */ }
+});
 ```
 
-Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Configuration Options
 
-## Build
+| Option           | Type                            | Description                          | Default       |
+|------------------|----------------------------------|--------------------------------------|---------------|
+| `defaultCountry` | `string`                         | The country to be pre-selected       | `'Venezuela'` |
+| `countryInfo`    | `Record<string, CountryInfo>`   | Custom country definitions           | Built-in list |
 
-Run `ng build phone-input-lib` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Styling Customization
 
-## Publishing
+The component uses CSS variables that can be overridden in your application:
 
-After building your library with `ng build phone-input-lib`, go to the dist folder `cd dist/phone-input-lib` and run `npm publish`.
+```css
+lib-phone-input {
+  --phone-input-gap: 20px;
+  --phone-input-country-width: 50%;
+  --phone-input-number-width: 50%;
+  --phone-input-font-size: 16px;
+  --phone-input-focus-color: #ff5722;
+  --phone-input-dark-focus-color: #ff8a65;
+  --phone-input-prefix-margin: 0 10px 0 10px;
+}
+```
 
-## Running Unit Tests
+### Available CSS Variables
 
-Run `ng test phone-input-lib` to execute the unit tests via [Karma](https://karma-runner.github.io).
+| Variable                          | Description                               | Default         |
+|----------------------------------|-------------------------------------------|------------------|
+| `--phone-input-gap`              | Gap between country and number inputs     | `15px`           |
+| `--phone-input-country-width`    | Width of the country select field         | `65%`            |
+| `--phone-input-number-width`     | Width of the phone number input field     | `65%`            |
+| `--phone-input-font-size`        | Font size for the country code prefix     | `14px`           |
+| `--phone-input-focus-color`      | Color for the focused input outline       | `#3f51b5`         |
+| `--phone-input-dark-focus-color` | Color for the focused input in dark theme | `#7986cb`        |
+| `--phone-input-prefix-margin`    | Margin around the country code prefix     | `0 15px 0 15px`  |
 
-## Further Help
+## Additional Exported Components
 
-To get more help on the Angular CLI, use `ng help` or check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli).
+### Pipes
+
+#### `InternationalPhonePipe`
+
+Formats a phone number with the country code:
+
+```html
+{{ phoneNumber | internationalPhone:countryKey }}
+```
+
+#### `PhonePrefixPipe`
+
+Gets the prefix code for a country:
+
+```html
+{{ countryKey | phonePrefix }}
+```
+
+### Validators
+
+#### `phoneMinLengthValidator`
+
+Validates if a phone number has the minimum required digits for a specific country:
+
+```ts
+import { phoneMinLengthValidator } from '@eliandsantos/phone-input-lib';
+
+const validators = [
+  phoneMinLengthValidator('USA')
+];
+```
+
+## Supported Countries
+
+The library includes pre-defined formats for countries in:
+
+- **North America**: USA, Canada, Mexico  
+- **South America**: Venezuela, Colombia, Argentina, etc.  
+- **Europe**: Spain, France, Germany, etc.  
+- **Asia-Pacific**: India, China, Japan, etc.  
+
+## Browser Compatibility
+
+The library uses Shadow DOM for style encapsulation, which is supported by all modern browsers.
+

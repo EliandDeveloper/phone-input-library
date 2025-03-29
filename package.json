@@ -1,5 +1,5 @@
 {
-  "name": "@eliandsantos/phone-component",
+  "name": "@eliandsantos/phone-input-lib",
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
@@ -9,6 +9,16 @@
     "test": "ng test"
   },
   "private": false,
+  "keywords": [
+    "angular",
+    "phone-input",
+    "international-phone",
+    "angular-library",
+    "form-control",
+    "angular-material",
+    "typescript"
+]
+,
   "dependencies": {
     "@angular/animations": "^18.2.0",
     "@angular/common": "^18.2.0",
