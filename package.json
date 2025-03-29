@@ -1,5 +1,5 @@
 {
-  "name": "@eliandsantos/phone-input-lib",
+  "name": "phone-input-lib-workspace",
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
