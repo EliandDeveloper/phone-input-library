@@ -1,6 +1,6 @@
 {
-  "name": "phone-input-lib",
-  "version": "0.0.1",
+  "name": "@eliandsantos/phone-input-lib",
+  "version": "0.0.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

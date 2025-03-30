@@ -1,5 +1,18 @@
 # Changelog
 
+
+## [0.0.3] - 2025-03-29
+
+### Added
+- 📄 Path package.json fixed
+
+## [0.0.2] - 2025-03-29
+
+### Added
+- 📄 Added `LICENSE` file under MIT License
+- 📝 Created comprehensive `README.md` with usage examples, features, and setup instructions
+
+
 ## [0.0.1] - 2025-03-29
 
 ### Added
